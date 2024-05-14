@@ -11,58 +11,194 @@
         a { color: #007bff; text-decoration: none; }
         .assinatura { font-size: 12px; }
         .logo { max-width: 100%; margin-bottom: -10px; }
-        .info { font-size: 20px; color: #f71818; }
+        .nome { 
+            font-size: 20px; 
+            color: #B0191A; 
+            position: relative;
+            width: 25px;
+            top: -10px; /* Ajuste o valor conforme necessário */
+        }
+        .setor {
+            font-size: 16px; 
+            color: #000000; 
+            position: relative;
+            top: -9px; /* Ajuste o valor conforme necessário */
+            width: 40px;
+            height: 25px;
+        }
+        .telefone {
+            font-size: 15px; 
+            color: #000000; 
+            position: relative;
+            top: 11px; /* Ajuste o valor conforme necessário */
+            width: 40px;
+            height: 25px;
+        }
+        .ramal {
+            font-size: 15px; 
+            color: #000000; 
+            position: relative;
+            top: 10px; /* Ajuste o valor conforme necessário */
+        }
+        .link {
+            font-size: 15px; 
+            color: #000000; 
+            position: relative;
+            top: 40px; /* Ajuste o valor conforme necessário */
+        }
+        .icon {
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 35px; /* Ajuste conforme necessário */
+        }
+        /* Campos de texto e link em negrito */
+        #nome, #setor, #telefone, #ramal, .link {
+            font-weight: bold;
+        }
+        .campo, .link {
+            font-family: Arial;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+        .campo {
+            font-family: Arial;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 22px); /* Ajuste conforme necessário */
+        }
+
+        .botao {
+            font-family: Arial;
+            background-color: #B0191A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            background-color: darkred;
+        }
     </style>
 </head>
 <body>
     <!-- Atualiza os Campos da Assinatura -->
-    <input type="text" id="nome" placeholder="Seu Nome"><br>
-    <input type="text" id="cargo" placeholder="Cargo"><br>
-    <input type="text" id="telefone" placeholder="Telefone"><br>
-    <input type="text" id="ramal" placeholder="Ramal"><br>
-    <input type="text" id="email" placeholder="Email"><br>
-    <button onclick="atualizarAssinatura()">Atualizar Assinatura</button>
+    <input type="text" id="nome" class="campo" placeholder="Seu Nome"><br>
+    <input type="text" id="setor" class="campo" placeholder="Setor"><br>
+    <input type="text" id="telefone" class="campo" placeholder="Telefone"><br>
+    <input type="text" id="ramal" class="campo" placeholder="Ramal"><br>
+    <button onclick="atualizarAssinatura()" class="botao">Atualizar Assinatura</button>
 
     <script>
+        function formatarTelefone(telefone) {
+            // Remover todos os caracteres que não são dígitos
+            telefone = telefone.replace(/\D/g, '');
+    
+            // Aplicar a formatação desejada
+            var padrao = '+XX XX X XXXX-XXXX';
+            var indice = 0;
+            var telefoneFormatado = '';
+            
+            for (var i = 0; i < padrao.length; i++) {
+                if (padrao[i] === 'X') {
+                    if (indice < telefone.length) {
+                        telefoneFormatado += telefone[indice];
+                        indice++;
+                    }
+                } else {
+                    telefoneFormatado += padrao[i];
+                }
+            }
+            
+            return telefoneFormatado;
+        }
+    
+        function formatarRamal(ramal) {
+            // Remover todos os caracteres que não são dígitos
+            ramal = ramal.replace(/\D/g, '');
+    
+            // Aplicar a formatação desejada
+            var padrao = '+XX XX XXXX-XXXX';
+            var indice = 0;
+            var ramalFormatado = '';
+            
+            for (var i = 0; i < padrao.length; i++) {
+                if (padrao[i] === 'X') {
+                    if (indice < ramal.length) {
+                        ramalFormatado += ramal[indice];
+                        indice++;
+                    }
+                } else {
+                    ramalFormatado += padrao[i];
+                }
+            }
+            
+            return ramalFormatado;
+        }
+    
         function atualizarAssinatura() {
-            var nome = document.getElementById("nome").value;
-            var cargo = document.getElementById("cargo").value;
-            var telefone = document.getElementById("telefone").value;
-            var ramal = document.getElementById("ramal").value;
-            var email = document.getElementById("email").value;
+            var nome = "<span class='bold'>" + (document.getElementById("nome").value || "Nome") + "</span>";
+            var setor = "<span class='bold'>" + (document.getElementById("setor").value || "Setor") + "</span>";
+            var telefone = "<span class='bold'>" + (formatarTelefone(document.getElementById("telefone").value) || "Telefone") + "</span>";
+            var ramal = "<span class='bold'>" + (formatarRamal(document.getElementById("ramal").value) || "Ramal") + "</span>";
     
             var assinatura = `
-                <strong class="info">${nome}</strong><br>
-                Cargo: ${cargo}<br>
-                Telefone: ${telefone}<br>
-                Ramal: ${ramal}<br>
-                Email: ${email}<br>
-                <a href="https://www.inova.ind.br/">www.inova.ind.br</a>
+                <div class="assinatura">
+                    <span class="nome">${nome}</span><br>
+                    <span class="setor">${setor}</span><br>
+                    <span class="telefone">${telefone}</span><br>
+                    <span class="ramal">${ramal}</span><br>
+                    <a href="https://www.inova.ind.br/" class="link">www.inova.ind.br</a>
+                    <div class="icon">
+                        <a href="https://www.facebook.com/sistemas.inova/?locale=pt_BR">
+                            <img src="https://raw.githubusercontent.com/D3F4LT-HAT/assinaturas/main/facebook.png" alt="Facebook" class="logo">
+                        </a>
+                        <a href="https://www.instagram.com/somos.inova/">
+                            <img src="https://github.com/D3F4LT-HAT/assinaturas/raw/main/instagram.png" alt="Instagram" class="logo">
+                        </a>
+                        <a href="https://www.linkedin.com/company/sistemas-inova/mycompany/">
+                            <img src="https://github.com/D3F4LT-HAT/assinaturas/raw/main/linkedin.png" alt="Linkedin" class="logo">
+                        </a>
+                    </div>
+                </div>
             `;
     
-            document.getElementById("assinatura").innerHTML = assinatura;
-
+            document.getElementById("assinatura-conteudo").innerHTML = assinatura;
+    
+            // Manter a formatação em negrito
+            document.querySelectorAll('.bold').forEach(element => {
+                element.style.fontWeight = 'bold';
+            });
+    
             // Limpar os campos
             document.getElementById("nome").value = "";
-            document.getElementById("cargo").value = "";
+            document.getElementById("setor").value = "";
             document.getElementById("telefone").value = "";
             document.getElementById("ramal").value = "";
-            document.getElementById("email").value = "";
         }
-    </script>
+    </script>           
+
     <!-- Conteúdo da Assinatura -->
     <table cellspacing="0" cellpadding="0">
         <tr>
-            <td style="width: 6%; text-align: left; vertical-align: middle;">
-                <img src="https://drive.google.com/uc?export=view&id=1Yn_F0bq43bAuuQhS8T5VIzGWPyPJLOO9" alt="Logotipo1" class="logo" style="margin-bottom: -10px;">
+            <td style="width: 220px; text-align: left; vertical-align: top; padding-right: 10px;">
+                <img src="https://raw.githubusercontent.com/D3F4LT-HAT/assinaturas/main/img_esquerda.png" alt="Logotipo_Esquerda" class="logo" width="215" height="148">
             </td>
-                <td style="width: 6%; text-align: left; vertical-align: middle;">
-                <div id="assinatura" class="assinatura"></div>
+
+            <td style="text-align: left; vertical-align: top; padding-right: 20px; padding-top: 10px;">
+                <div id="assinatura-conteudo"></div>
             </td>
-                <td style="width: 15%; text-align: left; vertical-align: middle;">
-                <img src="https://drive.google.com/uc?export=view&id=1V3_b69htj_aYL1p1dvmoOAP5X9hdEHcd" alt="Logotipo" class="logo" style="margin-bottom: -10px;">
-            </td>
+
+            <td style="width: 1400px; text-align: left; vertical-align: top; padding-left: 10px;">
+                <img src="https://raw.githubusercontent.com/D3F4LT-HAT/assinaturas/main/img_direita.png" alt="Logotipo_Direita" class="logo" width="215" height="148">
+            </td>         
         </tr>
-    </table>
+    </table>    
 </body>
 </html>

@@ -7,7 +7,7 @@
 		<style>
 			body {
 				font-family: Arial, sans-serif;
-				width: 30vw;
+				max-width: 766px;
 			}
 			table {
 				border-collapse: collapse;
@@ -85,8 +85,9 @@
 			.link-container {
 				margin-top: 10px; /* Mantém um pequeno espaçamento acima da URL */
 				text-align: left; /* Mantém o link à esquerda */
-			}
-			#container {
+				max-width: 325px;
+				display: flex;
+				flex-wrap: nowrap;
 			}
 			.lgpd {
 				font-size: 10px;
@@ -138,17 +139,17 @@
 			<table cellspacing="0" cellpadding="0">
 				<tr>
 					<td style="width: fit-content">
-						<img src="https://raw.githubusercontent.com/D3F4LT-HAT/assinaturas/main/img_esquerda.png" alt="Logotipo Esquerda" class="logo" />
+						<img src="https://raw.githubusercontent.com/D3F4LT-HAT/assinaturas/main/img_esquerda.png" alt="Logotipo Esquerda" class="logo" width="220px" />
 					</td>
 					<td>
 						<table cellspacing="0" cellpadding="0">
-							<tbody id="info-icons-row">
+							<tbody id="info-icons-row" style="max-width: 325px">
 								<!-- Dinamicamente inserido via JavaScript -->
 							</tbody>
 						</table>
 					</td>
 					<td>
-						<img src="https://raw.githubusercontent.com/D3F4LT-HAT/assinaturas/main/img_direita.png" alt="Logotipo Direita" class="logo" />
+						<img src="https://raw.githubusercontent.com/D3F4LT-HAT/assinaturas/main/img_direita.png" alt="Logotipo Direita" class="logo" width="220px"/>
 					</td>
 				</tr>
 				<tr>
